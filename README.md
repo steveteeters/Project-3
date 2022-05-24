@@ -1,3 +1,4 @@
+![logo (2)](https://user-images.githubusercontent.com/95944553/169931289-f562db29-e5bd-4839-88af-56aebb63d78e.svg)
 # Project-3
 
 Create a blockchain for the mining and distribution of donations from the donor to the end recipient. We will create a main account for the charity to mine tokens that we create that has a value tied to the USD. Donors will then create accounts in which they will purchase Ethereum to then purchse the mined tokens as a donation to the charity. The charity wallet will then collect these donated tokens and pass them to in-country partners who will distribute the mined tokens to the final recipient of the donations. We will also create a front end Streamlit model that will mimic a phone app to be created for use by the final recipient.
