@@ -1,22 +1,24 @@
-ragma solidity ^0.5.0;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.4;
 
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/release-v2.5.0/contracts/token/ERC20/ERC20.sol";
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/release-v2.5.0/contracts/token/ERC20/ERC20Detailed.sol";
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/release-v2.5.0/contracts/token/ERC20/ERC20Mintable.sol";
-import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/release-v2.5.0/contracts/token/ERC20/ERC20Burnable.sol";
+import "@openzeppelin/contracts@4.6.0/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts@4.6.0/token/ERC20/extensions/ERC20Burnable.sol";
+import "@openzeppelin/contracts@4.6.0/access/AccessControl.sol";
+import "@openzeppelin/contracts@4.6.0/token/ERC20/extensions/draft-ERC20Permit.sol";
 
-// Create a constructor for the KaseiCoin contract and have the contract inherit the libraries that you imported from OpenZeppelin.
+contract MyToken is ERC20, ERC20Burnable, AccessControl, ERC20Permit {
+    bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
+    bytes32 public constant DONAR_ROLE = keccak256("DONAR_ROLE");
 
-contract RCScoin is ERC20, ERC20Detailed, ERC20Mintable, ERC20Burnable {
-    constructor(
-        string memory RealCharitableSolutions,
-        string memory RCS,
-        uint256 initial_supply)
-        
-        ERC20Detailed(RealCharitableSolutions, RCS, 18)
-        public
-    
-    {
-        
+    constructor() ERC20("RealCharitableSolutions", "RCS") ERC20Permit("RealCharitableSolutions") {
+        _mint(msg.sender, 1000 * 10 ** decimals());
+        _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
+        _grantRole(MINTER_ROLE, msg.sender);
     }
+
+    function mint(address to, uint256 amount) public onlyRole(MINTER_ROLE) {
+        _mint(to, amount);
+    }
+
+    
 }
