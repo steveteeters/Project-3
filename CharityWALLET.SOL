@@ -1,0 +1,43 @@
+pragma solidity ^0.5.0;
+
+import "./RCScoin.sol";
+import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/release-v2.5.0/contracts/crowdsale/Crowdsale.sol";
+import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/release-v2.5.0/contracts/crowdsale/emission/MintedCrowdsale.sol";
+
+contract RCScoinCrowdsale is Crowdsale, MintedCrowdsale {
+    
+        constructor(
+        uint256 rate,
+        address payable wallet,
+        RCScoin token
+    ) 
+        public
+        Crowdsale(rate, wallet, token)
+        
+    {
+     
+    }
+}
+
+contract RCScoinCrowdsaleDeployer {
+
+    address public RCS_token_address;
+    address public RCS_crowdsale_address;
+    
+    constructor(
+        string memory name,
+        string memory symbol,
+        address payable wallet
+    )
+        public
+    {
+        RCScoin token = new RCScoin(name, symbol, 0);
+        RCS_token_address = address(token);
+       
+        RCScoinCrowdsale RCS_crowdsale = new RCScoinCrowdsale(1, wallet, token);    
+        RCS_crowdsale_address = address(RCS_crowdsale);
+        
+        token.addMinter(RCS_crowdsale_address);
+        token.renounceMinter();
+    }
+}
