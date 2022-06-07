@@ -55,14 +55,18 @@ if st.sidebar.button("Coin Information"):
 # Mint Tokens Fuunction (Checks to make sure the account calling the function has the minter role, 
 # then executes. otherwise an error will raise)
 st.write("Mint Tokens:")
-tokens_to_mint = st.number_input("Tokens to Mint")
+tokens_to_mint = st.number_input("Tokens to Mint", value = 0)
 if st.button("Mint"):
     if contract.caller.hasRole("0x9f2df0fed2c77648de5860a4cc508cd0818c85b8b8a1ab4ceeef8d981c8956a6",
      address) == True:
-      st.write("you are admin")
+      tx_hash = contract.functions.mint(address,tokens_to_mint).transact({'from': address, 'gas': 1000000})
+      receipt = w3.eth.waitForTransactionReceipt(tx_hash)
+      st.write("Transaction receipt mined:")
+      st.write(dict(receipt))
+
     else:
       st.write("you do not have permission to mint tokens")
-
+    
 
 
 st.markdown("---")
