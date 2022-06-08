@@ -51,7 +51,7 @@ if st.sidebar.button("Coin Information"):
     st.sidebar.write(contract.caller.symbol())
     st.sidebar.write("Token Supply:")
     st.sidebar.write(contract.caller.totalSupply())
-if st.sidebar.button("COntract Info"):
+if st.sidebar.button("Contract Info"):
     st.sidebar.write("Contract Balance in:")
     st.sidebar.write(w3.eth.get_balance(os.getenv("SMART_CONTRACT_ADDRESS")))
 
