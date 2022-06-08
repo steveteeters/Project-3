@@ -9,6 +9,7 @@ import "@openzeppelin/contracts@4.6.0/token/ERC20/extensions/draft-ERC20Permit.s
 contract MyToken is ERC20, ERC20Burnable, AccessControl, ERC20Permit {
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
     bytes32 public constant DONAR_ROLE = keccak256("DONAR_ROLE");
+    
 
     constructor() ERC20("RealCharitableSolutions", "RCS") ERC20Permit("RealCharitableSolutions") {
         _mint(msg.sender, 1000 * 10 ** decimals());
@@ -20,5 +21,12 @@ contract MyToken is ERC20, ERC20Burnable, AccessControl, ERC20Permit {
         _mint(to, amount);
     }
 
-    
+
+    function buy() payable public {
+        uint256 amountTobuy = msg.value;
+        _mint(msg.sender, amountTobuy);
+        transfer(address(this), amountTobuy);
 }
+
+}
+

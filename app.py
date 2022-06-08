@@ -51,13 +51,16 @@ if st.sidebar.button("Coin Information"):
     st.sidebar.write(contract.caller.symbol())
     st.sidebar.write("Token Supply:")
     st.sidebar.write(contract.caller.totalSupply())
+if st.sidebar.button("COntract Info"):
+    st.sidebar.write("Contract Balance in:")
+    st.sidebar.write(w3.eth.get_balance(os.getenv("SMART_CONTRACT_ADDRESS")))
 
 # Mint Tokens Fuunction (Checks to make sure the account calling the function has the minter role, 
 # then executes. otherwise an error will raise)
 st.write("Mint Tokens:")
 tokens_to_mint = st.number_input("Tokens to Mint", value = 0)
 if st.button("Mint"):
-    if contract.caller.hasRole("0x9f2df0fed2c77648de5860a4cc508cd0818c85b8b8a1ab4ceeef8d981c8956a6",
+    if contract.caller.hasRole(contract.caller.MINTER_ROLE(),
      address) == True:
       tx_hash = contract.functions.mint(address,tokens_to_mint).transact({'from': address, 'gas': 1000000})
       receipt = w3.eth.waitForTransactionReceipt(tx_hash)
@@ -67,7 +70,13 @@ if st.button("Mint"):
     else:
       st.write("you do not have permission to mint tokens")
     
-
+st.write("Buy_Tokens")
+tokens_to_buy = st.number_input("Tokens to Buy", value = 0)
+if st.button("Buy RCS Tokens"):
+      tx_hash = contract.functions.buy().transact({'from': address, 'gas': 1000000, 'value': tokens_to_buy})
+      receipt = w3.eth.waitForTransactionReceipt(tx_hash)
+      st.write("Transaction receipt mined:")
+      st.write(dict(receipt))
 
 st.markdown("---")
 
