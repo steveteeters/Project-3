@@ -15,6 +15,8 @@ Create a blockchain for the mining and distribution of donations from the donor 
 ## Powerpoint
 PowerPoint from the final presentation
 
+[Project 3.1.pptx](https://github.com/steveteeters/Project-3/files/8865929/Project.3.1.pptx)
+
 ---
 ## Analysis
 * Failed to create a coin based on the USDC.
