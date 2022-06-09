@@ -51,6 +51,15 @@ if st.sidebar.button("Coin Information"):
     st.sidebar.write(contract.caller.symbol())
     st.sidebar.write("Token Supply:")
     st.sidebar.write(contract.caller.totalSupply())
+if st.sidebar.button("Send Money"):
+    st.sidebar.write("Send Money:")
+    st.sidebar.write(contract.caller.sendMoney())
+if st.sidebar.button("Buy Coins"):
+    st.sidebar.write("Buy:")
+    st.sidebar.write(contract.caller.buy())
+if st.sidebar.button("BurnCoins"):
+    st.sidebar.write("Burn Coins:")
+    st.sidebar.write(contract.caller.burn())
 if st.sidebar.button("Contract Info"):
     st.sidebar.write("Contract Balance in:")
     st.sidebar.write(w3.eth.get_balance(os.getenv("SMART_CONTRACT_ADDRESS")))
