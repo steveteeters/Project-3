@@ -1,6 +1,6 @@
 # Project-3
-*Rexford Goodstein*
-*Steve Teeters*
+* *Rexford Goodstein*
+* *Steve Teeters*
 ---
 ![logo (2)](https://user-images.githubusercontent.com/95944553/169931289-f562db29-e5bd-4839-88af-56aebb63d78e.svg)
 ---
